@@ -21,7 +21,7 @@ public class Spawn : MonoBehaviour
         {
             for (int j = 0; j < 100; j++)
             {
-                index = 100 * i + j;
+                index = (i % 2) == 0 ? (100 * i + j) : (100 * i - j);
                 var pos = new Vector3(i * distance, 0f, j * distance);
                 var cub = Instantiate(cubPrefab, pos, Quaternion.identity);
                 cub.transform.parent = parentTransforms[index % sizeArr];
@@ -35,9 +35,9 @@ public class Spawn : MonoBehaviour
         for (int i = 0; i < parentTransforms.Length; i++)
         {
             Transform trans = parentTransforms[i];
-            var frequence = 3f;
+            var frequence = 2f;
             var ampitude = distance;
-            float randomPhase = 1f / (Random.Range(1, 6));
+            float randomPhase = 1f / (Random.Range(1, 10));
             float newY = Mathf.Sin(time * frequence + randomPhase) * ampitude;
             trans.position = new Vector3(trans.position.x, newY, trans.position.z);
         }
